@@ -1,6 +1,6 @@
 # COMPILADORES
 
-Projeto de compiladores utilizanod `sableCC` para criação de um compilador para a linguagem `cida`.
+Projeto de compiladores utilizando `sableCC` para criação de um compilador para a linguagem `cida`.
 
 ## Instruções
 
