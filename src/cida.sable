@@ -10,8 +10,8 @@ Helpers
   cr = 13;
   nl = 10;
   tab = 9;
+  eol = (cr nl | cr | nl);
   aspa_simples = 39;
-  eol = cr nl | cr | nl;
 
 Tokens
   ponto = '.';
@@ -59,11 +59,9 @@ Tokens
   show = 'show';
   yes = 'yes';
   no = 'no';
-  number = (digito)+ | (digito)+ '.' (digito)+;
+  number = ((digito)+ | (digito)+ '.' (digito)+);
   id = (letra)+;
   vazio = (eol | tab | espaco)+;
 
 Ignored Tokens
   vazio;
-
-

@@ -87,6 +87,18 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseTAspaSimples(TAspaSimples node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTAspasDuplas(TAspasDuplas node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseTInicioComentarioLinha(TInicioComentarioLinha node)
     {
         defaultCase(node);
