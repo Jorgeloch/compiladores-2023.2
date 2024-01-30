@@ -6,9 +6,18 @@ Helpers
   maiusculo = ['A' .. 'Z'];
   minusculo = ['a' .. 'z'];
   letra =  [maiusculo + minusculo];
-  id = (letra)+;
   espaco = ' ';
+  cr = 13;
+  nl = 10;
+  tab = 9;
+  aspa_simples = 39;
+  eol = cr nl | cr | nl;
+
+Tokens
   ponto = '.';
+  code = 'code';
+  id = (letra)+;
+  number = (digito)+ | (digito)+ '.' (digito)+;
   virgula = ',';
   inicio_comentario_linha = '--';
   abre_comentario_bloco = '{-';
@@ -52,59 +61,6 @@ Helpers
   show = 'show';
   yes = 'yes';
   no = 'no';
-  aspa_simples = 39;
-  cr = 13;
-  nl = 10;
-  tab = 9;
-  eol = cr nl | cr | nl;
-
-Tokens
-  operador = menos 
-            | mais
-            | multiplicacao
-            | divisao
-            | modulo
-            | igualdade
-            | diferente
-            | menor
-            | maior
-            | menor_igual
-            | maior_igual
-            | negacao
-            | and
-            | or
-            | xor;
-  
-  number = (digito)+ | (digito)+ ponto (digito)+;
-  symbol = aspa_simples tudo aspa_simples;
-  answer = yes | no;
-  programa = 'code' id bloco;
-  bloco = inicio (declaracao)* (comando)* fim;
-  tipo_base = 'symbol' | 'number' | 'answer';
-  tipo = tipo_base 
-        | tipo_base vector (colchete_e exp colchete_d)+;
-  declaracao = alterable tipo id ponto
-              | unalterable tipo_base id atribuicao exp ponto 
-              | unalterable tipo_base id ponto;
-  local = id 
-          | local colchete_e exp colchete_d;
-  comando = local atribuicao exp ponto 
-            | capture parentese_e (local virgula)* local parentese_d ponto
-            | show parentese_e (exp virgula)* exp parentese_e ponto
-            | condicional parentese_e exp parentese_d do comando 
-            | condicional parentese_e exp parentese_d do comando otherwise comando
-            | enquanto as parentese_e exp parentese_d do comando
-            | considering local from exp to exp by exp do comando
-            | bloco;
-  condicional = in case that;
-  enquanto = as long as;
-  comentario_simples = inicio_comentario_linha tudo* eol;
-  comentario_bloco = abre_comentario_bloco tudo* fecha_comentario_bloco;
-  exp = number | symbol | answer | local
-        | parentese_e exp parentese_d
-        | menos exp
-        | exp operador exp
-        | not exp;
   vazio = (eol | tab | espaco)*;
 
 Ignored Tokens

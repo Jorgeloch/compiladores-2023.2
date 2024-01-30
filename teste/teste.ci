@@ -1,0 +1,9 @@
+code fibonacci
+start
+    alterable number out << 0.
+    alterable number i.
+    unalterable number n << capture().
+    considering i from 1 to n by 1 do
+        out << out + i.
+    show(out).
+finish
