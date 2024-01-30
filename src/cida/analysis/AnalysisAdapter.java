@@ -81,18 +81,6 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseTId(TId node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseTNumber(TNumber node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
     public void caseTVirgula(TVirgula node)
     {
         defaultCase(node);
@@ -346,6 +334,18 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseTNo(TNo node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTNumber(TNumber node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTId(TId node)
     {
         defaultCase(node);
     }

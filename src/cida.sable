@@ -16,8 +16,6 @@ Helpers
 Tokens
   ponto = '.';
   code = 'code';
-  id = (letra)+;
-  number = (digito)+ | (digito)+ '.' (digito)+;
   virgula = ',';
   inicio_comentario_linha = '--';
   abre_comentario_bloco = '{-';
@@ -61,7 +59,9 @@ Tokens
   show = 'show';
   yes = 'yes';
   no = 'no';
-  vazio = (eol | tab | espaco)*;
+  number = (digito)+ | (digito)+ '.' (digito)+;
+  id = (letra)+;
+  vazio = (eol | tab | espaco)+;
 
 Ignored Tokens
   vazio;
