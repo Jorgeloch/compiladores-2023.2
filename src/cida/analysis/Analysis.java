@@ -12,10 +12,11 @@ public interface Analysis extends Switch
     void setOut(Node node, Object o);
 
     void caseTPonto(TPonto node);
-    void caseTCode(TCode node);
     void caseTVirgula(TVirgula node);
-    void caseTAspaSimples(TAspaSimples node);
-    void caseTAspasDuplas(TAspasDuplas node);
+    void caseTCode(TCode node);
+    void caseTTipoNumber(TTipoNumber node);
+    void caseTTipoAnswer(TTipoAnswer node);
+    void caseTTipoSymbol(TTipoSymbol node);
     void caseTInicioComentarioLinha(TInicioComentarioLinha node);
     void caseTAbreComentarioBloco(TAbreComentarioBloco node);
     void caseTFechaComentarioBloco(TFechaComentarioBloco node);

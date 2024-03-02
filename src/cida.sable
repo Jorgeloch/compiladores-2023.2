@@ -15,8 +15,11 @@ Helpers
 
 Tokens
   ponto = '.';
-  code = 'code';
   virgula = ',';
+  code = 'code';
+  tipo_number = 'number';
+  tipo_answer = 'answer';
+  tipo_symbol = 'symbol';
   inicio_comentario_linha = '--';
   abre_comentario_bloco = '{-';
   fecha_comentario_bloco = '-}';

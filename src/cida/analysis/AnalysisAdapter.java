@@ -75,25 +75,31 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
-    public void caseTCode(TCode node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
     public void caseTVirgula(TVirgula node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTAspaSimples(TAspaSimples node)
+    public void caseTCode(TCode node)
     {
         defaultCase(node);
     }
 
     @Override
-    public void caseTAspasDuplas(TAspasDuplas node)
+    public void caseTTipoNumber(TTipoNumber node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTTipoAnswer(TTipoAnswer node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTTipoSymbol(TTipoSymbol node)
     {
         defaultCase(node);
     }
