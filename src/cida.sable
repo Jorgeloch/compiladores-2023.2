@@ -11,6 +11,7 @@ Helpers
   nl = 10;
   tab = 9;
   eol = (cr nl | cr | nl);
+  aspa_dupla = 34;
   aspa_simples = 39;
 
 Tokens
@@ -20,9 +21,6 @@ Tokens
   tipo_number = 'number';
   tipo_answer = 'answer';
   tipo_symbol = 'symbol';
-  inicio_comentario_linha = '--';
-  abre_comentario_bloco = '{-';
-  fecha_comentario_bloco = '-}';
   parentese_e = '(';
   parentese_d = ')';
   colchete_e = '[';
@@ -62,9 +60,16 @@ Tokens
   show = 'show';
   yes = 'yes';
   no = 'no';
+  comentario_bloco = '{-' tudo* '-}';
+  comentario_linha = '--' (digito | letra | espaco)* eol;
   number = ((digito)+ | (digito)+ '.' (digito)+);
+  symbol = aspa_simples [tudo - aspa_simples] aspa_simples;
+  symbol_vector = aspa_dupla ([tudo - aspa_dupla])* aspa_dupla;
   id = (letra)+;
   vazio = (eol | tab | espaco)+;
 
 Ignored Tokens
+  comentario_linha,
+  comentario_bloco,
   vazio;
+

@@ -1,4 +1,5 @@
 code fibonacci
+-- comentario de linha
 start
     alterable number out << 0.
     alterable number i.
@@ -6,4 +7,7 @@ start
     considering i from 1 to n by 1 do
         out << out + i.
     show(out).
+    {-
+    algum comentario de bloco.
+    -}
 finish
