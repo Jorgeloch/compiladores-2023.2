@@ -49,6 +49,7 @@ Tokens
   in = 'in';
   case = 'case';
   that = 'that';
+  otherwise = 'otherwise';
   considering = 'considering';
   from = 'from';
   to = 'to';
@@ -63,12 +64,12 @@ Tokens
   show = 'show';
   yes = 'yes';
   no = 'no';
+  id = (letra)+;
   symbol = aspa_simples (caractere_unico | sequencia_de_escape) aspa_simples;
   symbol_vector = aspa_dupla (caracteres | sequencia_de_escape)* aspa_dupla;
   comentario_bloco = '{-' tudo* '-}';
   comentario_linha = '--' (digito | letra | espaco)* eol;
   number = ((digito)+ | (digito)+ '.' (digito)+);
-  id = (letra)+;
   vazio = (eol | tab | espaco)+;
 
 Ignored Tokens
@@ -76,3 +77,95 @@ Ignored Tokens
   comentario_bloco,
   vazio;
 
+Productions
+  programa = {programa} code id bloco;
+
+  bloco = {bloco} start declaracao comando finish;
+
+  declaracao = 
+    {alterable} alterable tipo id ponto 
+    |{unalterable} unalterable tipo_base id atribuicao_opcional ponto;
+
+  atribuicao_opcional =
+    {atribuicao_opcional} atribuicao expr
+    |{vazio_atribuicao};
+
+  tipo_base = 
+    {number} tipo_number
+    |{answer} tipo_answer
+    |{symbol} tipo_symbol;
+
+  tipo =
+    {default} tipo_base
+    |{vector} tipo_base vector address+;
+
+  local =
+    {identificador} id
+    |{endereco} local address;
+
+  address =
+    {address} colchete_e expr colchete_d;
+
+  comando =
+    {atrib} local atribuicao expr ponto
+    |{capture} capture parentese_e local_virgula* local parentese_d ponto
+    |{show} show parentese_e expr_virgula* expr parentese_d ponto
+    |{conditional} in case that parentese_e expr parentese_d do comando otherwise_opicional
+    |{as_long_as} as long as parentese_e expr parentese_d do comando
+    |{for} considering local from expr to expr by expr do comando
+    |{bloco} bloco;
+
+  otherwise_opicional =
+    {otherwise} otherwise do comando
+    |{vazio};
+
+  local_virgula = 
+    {local_virgula} local virgula;
+
+  expr_virgula =
+    {expr_virgula} expr virgula;
+  expr = 
+    {expr_or} expr_or;
+
+  expr_or =
+    {expr_and} expr_and
+    |{or} expr_or or expr_or;
+  
+  expr_and =
+    {expr_negacao} expr_negacao
+    |{and} expr_and and expr_and;
+
+  expr_negacao = 
+    {expr_comparacao} expr_comparacao
+    |{not} not expr_negacao;
+
+  expr_comparacao = 
+    {expr_matematica} expr_matematica
+    |{maior_igual} expr_comparacao maior_igual expr_comparacao
+    |{maior} expr_comparacao maior expr_comparacao
+    |{menor_igual} expr_comparacao menor_igual expr_comparacao
+    |{menor} expr_comparacao menor expr_comparacao
+    |{igualdade} expr_comparacao igualdade expr_comparacao
+    |{diferente} expr_comparacao diferente expr_comparacao;
+
+  expr_matematica =     
+    {fator} fator
+    |{soma} expr_matematica mais fator
+    |{menos} expr_matematica menos fator;
+  
+  fator =
+    {expr_negativo} expr_negativo
+    |{multiplicacao} fator multiplicacao expr_negativo 
+    |{divisao} faotr divisao expr_negativo;
+
+  expr_negativo =
+    {termo} termo
+    |{negativo} menos expr_negativo;
+
+  termo = 
+    {number} number
+    |{answer} answer
+    |{symbol} symbol
+    |{symbol_vector} symbol_vector
+    |{local} local
+    |{parenteses} parentese_e expr parentese_d;
