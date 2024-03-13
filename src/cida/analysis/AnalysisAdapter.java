@@ -339,6 +339,18 @@ public class AnalysisAdapter implements Analysis
     }
 
     @Override
+    public void caseTSymbol(TSymbol node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
+    public void caseTSymbolVector(TSymbolVector node)
+    {
+        defaultCase(node);
+    }
+
+    @Override
     public void caseTComentarioBloco(TComentarioBloco node)
     {
         defaultCase(node);
@@ -352,18 +364,6 @@ public class AnalysisAdapter implements Analysis
 
     @Override
     public void caseTNumber(TNumber node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseTSymbol(TSymbol node)
-    {
-        defaultCase(node);
-    }
-
-    @Override
-    public void caseTSymbolVector(TSymbolVector node)
     {
         defaultCase(node);
     }

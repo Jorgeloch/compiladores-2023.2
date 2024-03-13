@@ -1,18 +1,21 @@
 Package cida;
 
 Helpers
-  tudo = [0 .. 0xFF];
+  tudo = [0 .. 0xFFFF];
   digito = ['0' .. '9'];
   maiusculo = ['A' .. 'Z'];
   minusculo = ['a' .. 'z'];
+  caractere_unico = [tudo - '''];
+  caracteres = [tudo - '"'];
   letra =  [maiusculo + minusculo];
   espaco = ' ';
   cr = 13;
   nl = 10;
   tab = 9;
-  eol = (cr nl | cr | nl);
   aspa_dupla = 34;
   aspa_simples = 39;
+  eol = (cr nl | cr | nl);
+  sequencia_de_escape = '\' (aspa_simples | aspa_dupla | '\' | '0' | 'a' | 'b' | 'f' | 'n' | 'r' | 't' | 'v' );
 
 Tokens
   ponto = '.';
@@ -60,11 +63,11 @@ Tokens
   show = 'show';
   yes = 'yes';
   no = 'no';
+  symbol = aspa_simples (caractere_unico | sequencia_de_escape) aspa_simples;
+  symbol_vector = aspa_dupla (caracteres | sequencia_de_escape)* aspa_dupla;
   comentario_bloco = '{-' tudo* '-}';
   comentario_linha = '--' (digito | letra | espaco)* eol;
   number = ((digito)+ | (digito)+ '.' (digito)+);
-  symbol = aspa_simples [tudo - aspa_simples] aspa_simples;
-  symbol_vector = aspa_dupla ([tudo - aspa_dupla])* aspa_dupla;
   id = (letra)+;
   vazio = (eol | tab | espaco)+;
 

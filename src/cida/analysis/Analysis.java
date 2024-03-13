@@ -56,11 +56,11 @@ public interface Analysis extends Switch
     void caseTShow(TShow node);
     void caseTYes(TYes node);
     void caseTNo(TNo node);
+    void caseTSymbol(TSymbol node);
+    void caseTSymbolVector(TSymbolVector node);
     void caseTComentarioBloco(TComentarioBloco node);
     void caseTComentarioLinha(TComentarioLinha node);
     void caseTNumber(TNumber node);
-    void caseTSymbol(TSymbol node);
-    void caseTSymbolVector(TSymbolVector node);
     void caseTId(TId node);
     void caseTVazio(TVazio node);
     void caseEOF(EOF node);
