@@ -110,21 +110,21 @@ Productions
   comando =
     {atrib} local atribuicao expr ponto
     |{as_long_as} [left]:as long [right]:as parentese_e expr parentese_d do comando
-    |{considering} considering local from [left]:expr to [middle]:expr by [right]:expr do comando
-    |{conditional} in case that parentese_e expr parentese_d do comando otherwise_opicional
-    |{capture} capture parentese_e local_virgula* local parentese_d ponto
+    |{considering} considering local from [start]:expr to [finish]:expr by [step]:expr do comando
+    |{conditional} in case that parentese_e expr parentese_d do comando otherwise_expr? 
+    |{capture} capture parentese_e [locais]:local_virgula* local parentese_d ponto
     |{show} show parentese_e expr_virgula* expr parentese_d ponto
     |{bloco} bloco;
 
-  otherwise_opicional =
-    {otherwise} otherwise do comando
-    |{vazio};
+  otherwise_expr =
+    {otherwise_expr} otherwise do comando;
 
   local_virgula = 
     {local_virgula} local virgula;
 
   expr_virgula =
     {expr_virgula} expr virgula;
+
   expr = 
     {expr_or} expr_or;
 
