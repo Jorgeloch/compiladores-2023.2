@@ -18,6 +18,7 @@ Helpers
   sequencia_de_escape = '\' (aspa_simples | aspa_dupla | '\' | '0' | 'a' | 'b' | 'f' | 'n' | 'r' | 't' | 'v' );
 
 Tokens
+  not = '!';
   ponto = '.';
   virgula = ',';
   code = 'code';
@@ -58,8 +59,8 @@ Tokens
   unalterable = 'unalterable';
   alterable = 'alterable';
   vector = 'vector';
-  inicio = 'start';
-  fim = 'finish';
+  start = 'start';
+  finish = 'finish';
   capture = 'capture';
   show = 'show';
   yes = 'yes';
@@ -108,11 +109,11 @@ Productions
 
   comando =
     {atrib} local atribuicao expr ponto
+    |{as_long_as} [left]:as long [right]:as parentese_e expr parentese_d do comando
+    |{considering} considering local from [left]:expr to [middle]:expr by [right]:expr do comando
+    |{conditional} in case that parentese_e expr parentese_d do comando otherwise_opicional
     |{capture} capture parentese_e local_virgula* local parentese_d ponto
     |{show} show parentese_e expr_virgula* expr parentese_d ponto
-    |{conditional} in case that parentese_e expr parentese_d do comando otherwise_opicional
-    |{as_long_as} as long as parentese_e expr parentese_d do comando
-    |{for} considering local from expr to expr by expr do comando
     |{bloco} bloco;
 
   otherwise_opicional =
@@ -129,24 +130,39 @@ Productions
 
   expr_or =
     {expr_and} expr_and
-    |{or} expr_or or expr_or;
+    |{or} expr_or or expr_and;
   
   expr_and =
     {expr_negacao} expr_negacao
-    |{and} expr_and and expr_and;
+    |{and} expr_and and expr_negacao;
 
   expr_negacao = 
-    {expr_comparacao} expr_comparacao
+    {expr_igualdade} expr_igualdade
     |{not} not expr_negacao;
 
-  expr_comparacao = 
+  expr_igualdade = 
+    {expr_maior_igual} expr_maior_igual
+    |{igualdade} expr_igualdade igualdade expr_maior_igual;
+
+  expr_maior_igual =
+    {expr_maior} expr_maior
+    |{maior_igual} expr_maior_igual maior_igual expr_maior;
+
+  expr_maior =
+    {expr_menor} expr_menor
+    |{maior} expr_maior maior expr_menor;
+
+  expr_menor = 
+    {expr_menor_igual} expr_menor_igual
+    |{menor} expr_menor menor expr_menor_igual;
+
+  expr_menor_igual = 
+    {expr_diferente} expr_diferente
+    |{menor_igual} expr_menor_igual menor_igual expr_diferente;
+  
+  expr_diferente =
     {expr_matematica} expr_matematica
-    |{maior_igual} expr_comparacao maior_igual expr_comparacao
-    |{maior} expr_comparacao maior expr_comparacao
-    |{menor_igual} expr_comparacao menor_igual expr_comparacao
-    |{menor} expr_comparacao menor expr_comparacao
-    |{igualdade} expr_comparacao igualdade expr_comparacao
-    |{diferente} expr_comparacao diferente expr_comparacao;
+    |{diferente} expr_diferente diferente expr_matematica;
 
   expr_matematica =     
     {fator} fator
@@ -156,7 +172,7 @@ Productions
   fator =
     {expr_negativo} expr_negativo
     |{multiplicacao} fator multiplicacao expr_negativo 
-    |{divisao} faotr divisao expr_negativo;
+    |{divisao} fator divisao expr_negativo;
 
   expr_negativo =
     {termo} termo
@@ -169,3 +185,8 @@ Productions
     |{symbol_vector} symbol_vector
     |{local} local
     |{parenteses} parentese_e expr parentese_d;
+
+  answer =
+    {yes} yes
+    |{no} no;
+
