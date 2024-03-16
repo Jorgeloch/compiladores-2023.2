@@ -1,4 +1,4 @@
-Package cida;
+Package cida; 
 
 Helpers
   tudo = [0 .. 0xFFFF];
@@ -109,18 +109,19 @@ Productions
 
   comando =
     {atrib} local atribuicao expr ponto
-    |{as_long_as} [left]:as long [right]:as parentese_e expr parentese_d do comando
-    |{considering} considering local from [start]:expr to [finish]:expr by [step]:expr do comando
-    |{conditional} in case that parentese_e expr parentese_d do comando otherwise_expr? 
-    |{capture} capture parentese_e [locais]:local_virgula* local parentese_d ponto
-    |{show} show parentese_e expr_virgula* expr parentese_d ponto
-    |{bloco} bloco;
-
-  otherwise_expr =
-    {otherwise_expr} otherwise do comando;
+    |{as_long_as} [left]:as long [right]:as parentese_e expr parentese_d do comando |
+    {considering} considering local from [start]:expr to [finish]:expr by [step]:expr do comando |
+    {conditional} in case that parentese_e expr parentese_d do otherwise_expr |
+    {capture} capture parentese_e [locais]:local_virgula* local parentese_d ponto |
+    {show} show parentese_e expr_virgula* expr parentese_d ponto |
+    {bloco} bloco; 
+  
+  otherwise_expr = 
+  {only_comando} comando |
+  {otherwise_expr} otherwise do comando; 
 
   local_virgula = 
-    {local_virgula} local virgula;
+  {local_virgula} local virgula;
 
   expr_virgula =
     {expr_virgula} expr virgula;
